@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Build Durable</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Bootstrap css file-->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <link rel="stylesheet" type="text/css" href="css/hover.css">
+    <link rel="stylesheet" type="text/css" href="css/mmenu.css">
+    <link rel="stylesheet" type="text/css" href="css/vmenuModule.css">
+    <link rel="stylesheet" type="text/css" href="css/nice-select.css">
+    <link rel="stylesheet" type="text/css" href="css/owl.theme.css">
+    <link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="css/fontawesome-all.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- DESKTOP -->
+    <link href="css/style-desktop.css" rel="stylesheet" type="text/css" media="only screen and (min-width:979px) and (max-width:1400px)">
+    <!-- TABLET -->
+    <link href="css/style-tablet.css" rel="stylesheet" type="text/css" media="only screen and (min-width:768px) and (max-width:978px)">
+    <!-- MOBILE -->
+    <link href="css/style-mobile.css" rel="stylesheet" type="text/css" media="only screen and (min-width:461px) and (max-width:767px)">
+    <!-- MOBILE SMALL-->
+    <link href="css/style-mobile-small.css" rel="stylesheet" type="text/css" media="only screen and (max-width:460px)">
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.scrollbar.js"></script>
+    <script src="js/jquery.fancybox.js"></script>
+    <script src="js/jquery.ulslide.js"></script>
+    <script src="js/mmenu.min.all.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/owl.carousel.js"></script>
+    <script src="js/owl.lazyload.js"></script>
+    <script src="js/jquery_ui.js"></script>
+    <script src="js/jquery.nice-select.js"></script>
+    <script src="js/vmenuModule.js"></script>
+    <script>
+    new WOW().init();
+    </script>
+    <script>
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 150) {
+            $('.header').addClass("fixed");
+        } else {
+            $('.header').removeClass("fixed");
+        }
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('select').niceSelect();
+    });
+    </script>
+    <script>
+    jQuery(document).ready(function($) {
+        $("#menu").mmenu({
+            "extensions": ["effect-menu-zoom", "effect-panels-zoom", "pagedim-black", "theme-dark"],
+            "offCanvas": {
+                "position": "left"
+            },
+            "counters": true,
+            "iconPanels": true,
+            "navbars": [{
+                "position": "top"
+            }],
+            "navbars": [{
+                "position": "top",
+                "content": [
+                    "searchfield"
+                ]
+            }],
+            "searchfield": {
+                "showSubPanels": false
+            }
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <div class="main_mmenu">
+        <div id="page">
+            <nav id="menu">
+                <ul>
+                    <li><a href="#">Products</a>
+                        <ul>
+                            <li><a href="#">PPRC Pipes & Fittings</a>
+                                <ul>
+                                    <li><a href="#">Demo 1</a>
+                                        <ul>
+                                            <li><a href="#">Demo 1</a></li>
+                                            <li><a href="#">Demo 2</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Demo 2</a></li>
+                                    <li><a href="#">Demo 3</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Poly Propylene Rendom Copolymer </a>
+                                <ul>
+                                    <li><a href="#">Demo 1</a></li>
+                                    <li><a href="#">Demo 2</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Socket</a></li>
+                            <li><a href="#">Plastic Pipe</a></li>
+                            <li><a href="#">Plastic Fittings</a></li>
+                            <li><a href="#">Poly Fittings</a></li>
+                            <li><a href="#">Water Supply Pipes and Fittings</a></li>
+                            <li><a href="#">Under Water Supply</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Services </a>
+                        <ul>
+                            <li><a href="#">Become A Member</a></li>
+                            <li><a href="#">Member Benefits</a></li>
+                            <li><a href="#">Shipping and Delivery </a></li>
+                            <li><a href="#">Shipping & Returns </a></li>
+                            <li><a href="#">Warranties Policies</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Company Profile</a>
+                        <ul>
+                            <li><a href="#">About Us & History </a></li>
+                            <li><a href="#">Message CEO</a></li>
+                            <li><a href="#">Mission & Vision</a></li>
+                            <li><a href="#">Management </a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Media</a>
+                        <ul>
+                            <li><a href="#">Current News</a></li>
+                            <li><a href="#">Ads & Events </a></li>
+                            <li><a href="#">Awards & Achievements</a></li>
+                            <li><a href="#">Certifications</a></li>
+                            <li><a href="#">Picture Gallery</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Partners</a>
+                        <ul>
+                            <li><a href="#">Brand Partners</a></li>
+                            <li><a href="#">International Partners</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Clients</a></li>
+                    <li><a href="#">Careers</a>
+                        <ul>
+                            <li><a href="#">Available Positions</a></li>
+                            <li><a href="#">Apply Now </a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Contact</a>
+                        <ul>
+                            <li><a href="#">Feedback Form </a></li>
+                            <li><a href="#">Inquiry Form </a></li>
+                            <li><a href="#">Offices</a></li>
+                            <li><a href="#">Sales & Marketing </a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div class="menu_icn"> <a href="#menu"><img src="webImages/menu.png" alt="" width="25" height="25" title="menu" /></a> <a href="#" class="mlogo"><img src="webImages/logo.png" alt="" title="menu" /></a>
+                <div class="utility">
+                    <a href="#"><i class="fas  fa-shopping-cart"></i><div class="cart_side_count">0</div>Sign Up / Log In</a>
+                </div>
+            </div>
+            <!--menu_icn end here-->
+        </div>
+        <!-- page close -->
+    </div>
+    <!-- main_mmenu close -->
+    <div class="main_container">
+        <div class="background_shade" style="display: none;">
+        </div>
+        <div class="main">
+            <div class="header wow fadeInLeft">
+                <div class="standard">
+                    <div class="logo">
+                        <a href="#"><img src="webImages/logo.png" alt=""></a>
+                    </div>
+                    <div class="nav">
+                        <ul>
+                            <li><a href="#">Products</a>
+                                <ul>
+                                    <li><a href="#">PPRC Pipes & Fittings</a>
+                                        <ul>
+                                            <li><a href="#">Demo 1</a>
+                                                <ul>
+                                                    <li><a href="#">Demo 1</a></li>
+                                                    <li><a href="#">Demo 2</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Demo 2</a></li>
+                                            <li><a href="#">Demo 3</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Poly Propylene Rendom Copolymer </a>
+                                        <ul>
+                                            <li><a href="#">Demo 1</a></li>
+                                            <li><a href="#">Demo 2</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Socket</a></li>
+                                    <li><a href="#">Plastic Pipe</a></li>
+                                    <li><a href="#">Plastic Fittings</a></li>
+                                    <li><a href="#">Poly Fittings</a></li>
+                                    <li><a href="#">Water Supply Pipes and Fittings</a></li>
+                                    <li><a href="#">Under Water Supply</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Services </a>
+                                <ul>
+                                    <li><a href="#">Become A Member</a></li>
+                                    <li><a href="#">Member Benefits</a></li>
+                                    <li><a href="#">Shipping and Delivery </a></li>
+                                    <li><a href="#">Shipping & Returns </a></li>
+                                    <li><a href="#">Warranties Policies</a></li>
+                                    <li><a href="#">FAQ</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Company Profile</a>
+                                <ul>
+                                    <li><a href="#">About Us & History </a></li>
+                                    <li><a href="#">Message CEO</a></li>
+                                    <li><a href="#">Mission & Vision</a></li>
+                                    <li><a href="#">Management </a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Media</a>
+                                <ul>
+                                    <li><a href="#">Current News</a></li>
+                                    <li><a href="#">Ads & Events </a></li>
+                                    <li><a href="#">Awards & Achievements</a></li>
+                                    <li><a href="#">Certifications</a></li>
+                                    <li><a href="#">Picture Gallery</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Partners</a>
+                                <ul>
+                                    <li><a href="#">Brand Partners</a></li>
+                                    <li><a href="#">International Partners</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Clients</a></li>
+                            <li><a href="#">Careers</a>
+                                <ul>
+                                    <li><a href="#">Available Positions</a></li>
+                                    <li><a href="#">Apply Now </a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Contact</a>
+                                <ul>
+                                    <li><a href="#">Feedback Form </a></li>
+                                    <li><a href="#">Inquiry Form </a></li>
+                                    <li><a href="#">Offices</a></li>
+                                    <li><a href="#">Sales & Marketing </a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="search_side">
+                        <a href="#"><i class="fas fa-search"></i></a>
+                    </div>
+                    <!-- search_side close -->
+                    <div class="utility">
+                        <a href="#"><i class="fas  fa-shopping-cart"></i><div class="cart_side_count">0</div>Sign Up / Log In</a>
+                    </div>
+                </div>
+            </div>
+            <div class="search_side2" style="display:none">
+                <form method="get" action="https://www.google.com.pk/search" target="_blank">
+                    <input type="hidden" name="sitesearch" value="http://google.com.pk">
+                    <input type="text" placeholder="Search..." name="q">
+                    <div class="close_btn">
+                        <img src="webImages/close.png" alt="">
+                    </div>
+                    <!-- close_btn close -->
+                </form>
+            </div>
+            <!-- search_side2 close -->
+        </div>
+        <script>
+        $(document).ready(function() {
+            $(".search_side").click(function() {
+                $(".search_side2").fadeToggle();
+            });
+        });
+        </script>
+        <script>
+        $(document).ready(function() {
+            $(".search_btn").click(function() {
+                $(".search_side2").fadeToggle();
+            });
+        });
+        </script>
+        <script>
+        $(document).ready(function() {
+            $(".close_btn").click(function() {
+                $(".search_side2").fadeToggle();
+            });
+        });
+        </script>
+        <script>
+        $(document).ready(function() {
+            $(".search_side").click(function() {
+                $(".background_shade").fadeToggle();
+            });
+        });
+        </script>
+        <script>
+        $(document).ready(function() {
+            $(".close_btn").click(function() {
+                $(".background_shade").fadeToggle();
+            });
+        });
+        </script>
+        <script>
+        $(document).ready(function() {
+            $(".search_btn").click(function() {
+                $(".background_shade").fadeToggle();
+            });
+        });
+        </script>
+        <!-- header close -->
+        <div class="divide">
+            <div class="standard">
+                <h1>product listing</h1>
+            </div>
+        </div>
+        <!-- divide close -->
+        <div class="product_side">
+            <div class="standard">
+                <!-- show_on close -->
+                <div class="left_product">
+                    <div class="left_product_col1">
+                        <div class="u-vmenu">
+                            <ul>
+                                <li> <a href="#">Demo 1</a><span></span>
+                                    <ul>
+                                        <li><a href="#">Demo 1</a><span></span>
+                                            <ul>
+                                                <li><a href="#">Demo 1</a></li>
+                                                <li><a href="#">Demo 2</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Demo 2</a></li>
+                                        <li><a href="#">Demo 3</a></li>
+                                    </ul>
+                                </li>
+                                <!-- li close -->
+                                <li> <a href="#">Demo 2</a><span><!-- drop --></span>
+                                    <ul>
+                                        <li><a href="#">Demo 1</a></li>
+                                        <li><a href="#">Demo 2</a></li>
+                                        <li><a href="#">Demo 3</a></li>
+                                    </ul>
+                                </li>
+                                <!-- li close -->
+                                <li> <a href="#">Demo3</a><span><!-- drop --></span>
+                                    <ul>
+                                        <li><a href="#">Demo 1</a></li>
+                                        <li><a href="#">Demo 2</a></li>
+                                    </ul>
+                                </li>
+                                <!-- li close -->
+                                <li> <a href="#">Demo 4</a><span><!-- drop --></span>
+                                    <ul>
+                                        <li><a href="#">Demo 1</a></li>
+                                        <li><a href="#">Demo 2</a></li>
+                                        <li><a href="#">Demo 3</a></li>
+                                        <li><a href="#">Demo 4</a></li>
+                                    </ul>
+                                </li>
+                                <!-- li close -->
+                            </ul>
+                            <!--  ul close -->
+                            <script>
+                            $(document).ready(function() {
+                                $(".u-vmenu").vmenuModule({
+                                    Speed: 200,
+                                    autostart: false,
+                                    autohide: true
+                                });
+                            });
+                            </script>
+                        </div>
+                    </div>
+                    <!-- left_product_col1 close -->
+                </div>
+                <!-- left_product close -->
+                <script>
+                $(document).ready(function() {
+                    $(".show_on").click(function() {
+                        $(".left_product").fadeToggle();
+                    });
+                });
+                </script>
+                <div class="right_product">
+                    <h1>PPRC Pipes & Fittings </h1>
+                    <div class="right_product_top">
+                        <div class="right_product_top_select sort_side">
+                            <select>
+                                <option>Sort</option>
+                                <option>Lowest Price Assending</option>
+                                <option>Highest Price Assending</option>
+                                <option>Most Visited Product</option>
+                            </select>
+                        </div>
+                        <!-- right_product_top_select close -->
+                    </div>
+                    <!-- right_product_top close -->
+                    <div class="product_main">
+                        <div class="col1_box">
+                            <a href="#">
+                                <div class="col1_box_img"> <img src="webImages/p1.jpg" alt=""> </div>
+                                <!-- col1_box_img close -->
+                                <div class="col1_box_txt">
+                                    <h3>Example 1</h3>
+                                    <h2>PKR 1,800.00</h2>
+                                    <h4>PKR 3,600.00</h4>
+                                    <div class="col1_box_btn"> <span>ADD TO CART</span> </div>
+                                    <!-- col1_box_btn close -->
+                                </div>
+                                <!-- col1_box_txt close -->
+                            </a>
+                        </div>
+                        <!-- col1_box close -->
+                        <div class="col1_box">
+                            <a href="#">
+                                <div class="col1_box_img"> <img src="webImages/p2.jpg" alt=""> </div>
+                                <!-- col1_box_img close -->
+                                <div class="col1_box_txt">
+                                    <h3>Example 2</h3>
+                                    <h2>PKR 6,500.00</h2>
+                                    <div class="col1_box_btn"> <span>ADD TO CART</span> </div>
+                                    <!-- col1_box_btn close -->
+                                </div>
+                                <!-- col1_box_txt close -->
+                            </a>
+                        </div>
+                        <!-- col1_box close -->
+                        <div class="col1_box">
+                            <a href="#">
+                                <div class="col1_box_img"> <img src="webImages/p3.jpg" alt=""> </div>
+                                <!-- col1_box_img close -->
+                                <div class="col1_box_txt">
+                                    <h3>Example 3</h3>
+                                    <h2>PKR 6,200.00</h2>
+                                    <h4>PKR 3,600.00</h4>
+                                    <div class="col1_box_btn"> <span>ADD TO CART</span> </div>
+                                    <!-- col1_box_btn close -->
+                                </div>
+                                <!-- col1_box_txt close -->
+                            </a>
+                        </div>
+                        <!-- col1_box close -->
+                        <div class="col1_box">
+                            <a href="#">
+                                <div class="col1_box_img"> <img src="webImages/p4.jpg" alt=""> </div>
+                                <!-- col1_box_img close -->
+                                <div class="col1_box_txt">
+                                    <h3>Example 4</h3>
+                                    <h2>PKR 2,900.00</h2>
+                                    <h4>PKR 5,800.00</h4>
+                                    <div class="col1_box_btn"> <span>ADD TO CART</span> </div>
+                                    <!-- col1_box_btn close -->
+                                </div>
+                                <!-- col1_box_txt close -->
+                            </a>
+                        </div>
+                        <!-- col1_box close -->
+                        <div class="col1_box">
+                            <a href="#">
+                                <div class="col1_box_img"> <img src="webImages/p5.jpg" alt=""> </div>
+                                <!-- col1_box_img close -->
+                                <div class="col1_box_txt">
+                                    <h3>Example 5</h3>
+                                    <h2>PKR 1,800.00</h2>
+                                    <h4>PKR 3,600.00</h4>
+                                    <div class="col1_box_btn"> <span>ADD TO CART</span> </div>
+                                    <!-- col1_box_btn close -->
+                                </div>
+                                <!-- col1_box_txt close -->
+                            </a>
+                        </div>
+                        <!-- col1_box close -->
+                        <div class="col1_box">
+                            <a href="#">
+                                <div class="col1_box_img"> <img src="webImages/p6.jpg" alt=""> </div>
+                                <!-- col1_box_img close -->
+                                <div class="col1_box_txt">
+                                    <h3>Example 6</h3>
+                                    <h2>PKR 6,500.00</h2>
+                                    <div class="col1_box_btn"> <span>ADD TO CART</span> </div>
+                                    <!-- col1_box_btn close -->
+                                </div>
+                                <!-- col1_box_txt close -->
+                            </a>
+                        </div>
+                        <!-- col1_box close -->
+                        <div class="col1_box">
+                            <a href="#">
+                                <div class="col1_box_img"> <img src="webImages/p7.jpg" alt=""> </div>
+                                <!-- col1_box_img close -->
+                                <div class="col1_box_txt">
+                                    <h3>Example 7</h3>
+                                    <h2>PKR 6,800.00</h2>
+                                    <div class="col1_box_btn"> <span>ADD TO CART</span> </div>
+                                    <!-- col1_box_btn close -->
+                                </div>
+                                <!-- col1_box_txt close -->
+                            </a>
+                        </div>
+                        <!-- col1_box close -->
+                        <div class="col1_box">
+                            <a href="#">
+                                <div class="col1_box_img"> <img src="webImages/p8.jpg" alt=""> </div>
+                                <!-- col1_box_img close -->
+                                <div class="col1_box_txt">
+                                    <h3>Example 8</h3>
+                                    <h2>PKR 2,900.00</h2>
+                                    <h4>PKR 5,800.00</h4>
+                                    <div class="col1_box_btn"> <span>ADD TO CART</span> </div>
+                                    <!-- col1_box_btn close -->
+                                </div>
+                                <!-- col1_box_txt close -->
+                            </a>
+                        </div>
+                        <!-- col1_box close -->
+                    </div>
+                    <!-- product_main close -->
+                    <div class="product_main_page"> Items <span>1-12</span> of <span>62</span> </div>
+                    <!-- product_main_page close -->
+                </div>
+                <!-- right_product close -->
+            </div>
+            <!-- standard close -->
+        </div>
+        <!-- product_side close -->
+        <div class="footer">
+            <div class="main_footer">
+                <div class="standard">
+                    <div class="col1">
+                        <h3>About Us</h3>
+                        <div class="col1_txt">
+                            Build Durale is a supplier and importer of materials and a wide range of interior and exterior products that have been specified and used in major high-end projects throughout the country and worldwide.
+                        </div>
+                    </div>
+                    <!-- col1 close -->
+                    <div class="col2">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="#">Products</a></li>
+                            <li><a href="#">Services </a></li>
+                            <li><a href="#">Company Profile</a></li>
+                            <li><a href="#">Media</a></li>
+                            <li><a href="#">Business Partners</a></li>
+                            <li><a href="#">Our Clients</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <!-- col2 close -->
+                    <div class="col3">
+                        <h3>Contact Info</h3>
+                        <div class="col3_txt">
+                            <div class="icn_main">
+                                <div class="icn">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="tt">Office No. 6, 2nd Floor, Aman Chamber, Shaheed Milat Service Road, Jinnah Housing Society PECHS, Karachi</div>
+                            </div>
+                            <div class="icn_main">
+                                <div class="icn">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="tt">+971 6 53 51527</div>
+                            </div>
+                            <div class="icn_main">
+                                <div class="icn">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="tt"><a href="mailto:info@builddurable.com">info@builddurable.com</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- col3 close -->
+                    <div class="col4">
+                        <h3>Locate Us</h3>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14479.43364381698!2d67.07320276184079!3d24.868684977183666!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x7f6c75c250c00393!2sInteractive+Media+-+Pakistan!5e0!3m2!1sen!2s!4v1523351535096" allowfullscreen></iframe>
+                    </div>
+                    <!-- col4 close -->
+                </div>
+                <!-- standard close -->
+            </div>
+            <!-- main_footer close -->
+            <div class="footnote">
+                <div class="standard">
+                    <div class="footnote_left">
+                        © Copyright 2018 <a href="index.html">BUILD DURABLE</a> All Rights Reserved.
+                    </div>
+                    <div class="footnote_right">
+                        <div class="imedia"> <a href="http://imedia.com.pk/" target="_blank" title="Karachi Web Designing Company" class="design_develop">Design &amp; Developed by:</a> <a href="http://imedia.com.pk/" target="_blank" title="Web Designing Company Pakistan"><img src="webImages/imedia.png" alt="">
+                        </a>
+                            <div class="m_text"> <a href="http://imedia.com.pk/" target="_blank" title="Website Design by Interactive Media">Interactive Media</a> <a href="http://imediaintl.com/" target="_blank" title="International Web Development Company" class="digital_media">DIGITAL MEDIA ON DEMAND <span>Globally</span></a> </div>
+                            <!--m_text end-->
+                        </div>
+                        <!-- imedia close -->
+                    </div>
+                </div>
+                <!-- standard close -->
+            </div>
+        </div>
+        <!-- footer close -->
+        <div class="footer_top_btn"><img src="webImages/top.png" alt=""></div>
+        <!-- footer_top_btn close -->
+        <script>
+        $(document).ready(function() {
+            $(window).on("scroll", function() {
+                if ($(this).scrollTop() > 200) {
+                    $('.footer_top_btn').fadeIn(400);
+                } else {
+                    $('.footer_top_btn').fadeOut(400);
+                }
+            });
+
+            $(".footer_top_btn").on("click", function() {
+                $("html, body").animate({ scrollTop: 0 }, 1200);
+            });
+
+        });
+        </script>
+    </div>
+    </div>
+    <!-- main_container close   -->
+</body>
+
+</html>

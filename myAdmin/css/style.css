@@ -1,0 +1,638 @@
+/*Basic reset*/
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body, #main_Div {
+    min-width: 570px;
+
+}
+
+.ui-widget {
+    font-size: 0.9em;
+}
+
+.content_div {
+    min-height: 700px;
+}
+
+.color_remove {
+    position: absolute;
+    color: #F05B5B;
+    display: none;
+    right: 0;
+    top: 50%;
+    margin-top: -7px;
+    cursor: pointer;
+}
+
+.slot_table tr:hover .color_remove {
+    display: inline-block;
+}
+
+.progress {
+    margin: 5px auto;
+
+}
+
+#container_div {
+    display: inline-block;
+    float: right;
+}
+
+.container {
+    width: 1040px;
+}
+
+.sub_heading {
+    color: #888;
+}
+
+.main_heading {
+    color: #000;
+    font-weight: bold;
+}
+
+/* Bootstrap */
+.navbar-nav > li > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.navbar {
+    min-height: 40px;
+}
+
+.navbar-brand {
+    height: 40px;
+    padding: 10px 15px;
+    font-size: 23px;
+}
+
+.navbar-inverse .navbar-toggle {
+    border-color: #111;
+}
+
+.navbar-toggle {
+    margin-top: 3px;
+    margin-right: 15px;
+    margin-bottom: 2px;
+}
+
+.no-margin-padding {
+    padding: 0;
+    margin: 0;
+}
+
+#main_Div {
+    min-height: 100% !important;
+    position: absolute;
+    width: 100%;
+}
+
+.IBMS_Main_Menu, #container_div {
+    padding-top: 41px;
+}
+
+.tabs_arrow {
+    padding-bottom: 3px;
+    border-bottom: 2px solid #87ba41;
+}
+
+.tabs_arrow li {
+    min-width: 70px;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    float: left;
+}
+
+.tabs_arrow li a {
+    color: #000;
+    font-weight: bold;
+    padding: 10px 5px 10px 27px;
+    background: #d8d8d8;
+    border-radius: 0px 2px 2px 0px;
+    position: relative;
+    display: block;
+    margin-right: 0px;
+}
+.tabs_arrow_div li a {
+    border-radius: 0px;
+}
+.tabs_arrow_div {
+    display: inline-block;
+    width: 100%;
+}
+
+.tabs_arrow li:first-child a {
+    padding: 10px 5px 10px 10px;
+}
+
+.tabs_arrow li a:hover, .tabs_arrow li.active a, .tabs_arrow li.active a:hover {
+    background-color: #87ba41;
+    background: #87ba41 !important;
+    color: #fff !important;
+}
+
+.tabs_arrow li a:hover:after, .tabs_arrow li.active a:after {
+    border-left-color: #87ba41;
+}
+
+.tabs_arrow li a:before {
+    content: " ";
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 21px solid white;
+    position: absolute;
+    top: 0%;
+    margin-top: 0px;
+    margin-left: 1px;
+    left: 100%;
+    z-index: 1;
+}
+
+.tabs_arrow li a:after {
+    content: " ";
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid #d8d8d8;
+    position: absolute;
+    top: 0px;
+    margin-top: 0px;
+    left: 100%;
+    z-index: 2;
+    margin-left: 0px;
+}
+
+.dataTables_info {
+    margin: 15px 0;
+    display: inline-block;
+    float: left;
+}
+
+.dataTables_length {
+    margin-bottom: 15px;
+}
+
+.dataTables_filter {
+    text-align: right;
+}
+
+.DTTT {
+    margin-bottom: 10px;
+}
+
+.modal-body {
+    overflow: auto;
+}
+
+@media screen and (max-width: 767px) {
+    .bootTable table input[type="text"], .bootTable table input[type="number"], {
+        padding: 6px 4px;
+    }
+
+    .bootTable table td {
+        padding: 4px !important;
+    }
+
+    .bootTable table th {
+        padding: 6px 4px !important;
+    }
+}
+
+/* Bootstrap end */
+ul.ColVis_collection {
+    width: auto !important;
+}
+
+.selectpicker {
+    width: 300px;
+}
+
+.color_label {
+    width: 46px;
+}
+
+.tableIBMS {
+    border-spacing: 2px;
+    border-collapse: separate;
+    font-size: 13px;
+
+}
+
+.tableIBMS th {
+    color: #fff;
+    border-radius: 5px;
+    background-color: #222 !important;
+    text-align: center;
+    vertical-align: middle !important;
+}
+.tableIBMS th:last-child {
+    min-width: 100px;
+}
+.tableIBMS td {
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    text-align: center;
+    vertical-align: middle !important;
+}
+
+.tableIBMS .tableBgGray {
+    background-color: #eee;
+}
+
+.tableIBMS td {
+    position: relative;
+}
+
+.preview {
+    cursor: pointer;
+}
+
+.borderIfNotabs {
+    border-bottom: 2px solid #87ba41;
+}
+
+.gray-tr th, .gray-tr td {
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    text-align: center;
+    vertical-align: middle !important;
+    background: #999 !important;
+    color: #000;
+    text-shadow: 0px 0px 32px #fff;
+}
+
+.gray-tr:hover th, .gray-tr:hover td {
+    background: #999 !important;
+    color: #000;
+
+}
+
+.tab_heading {
+    color: #a0a0a0;
+    font-size: 28px;
+}
+
+.sTable {
+    border-spacing: 2px;
+    border-collapse: separate;
+    font-size: 13px;
+}
+
+.sTable thead td, .sTable thead th {
+    color: #fff;
+    border-radius: 5px;
+    background-color: #222 !important;
+    text-align: center;
+    vertical-align: middle !important;
+}
+
+.sTable td {
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    text-align: center;
+    vertical-align: middle !important;
+}
+
+.ui-autocomplete {
+    max-height: 170px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+}
+
+/* IE 6 doesn't support max-height
+ * we use height instead, but this forces the menu to always be this tall
+ */
+* html .ui-autocomplete {
+    height: 170px;
+}
+
+/* JQuery ui confluict with bootstrap */
+
+.ui-dialog-titlebar-close {
+    background: url("../assets/jquery-ui/css/images/ui-icons_222222_256x240.png") -96px -128px;
+}
+
+.ui-dialog-titlebar-close {
+    border: 1px solid #d3d3d3;
+    border-radius: 4px;
+    font-weight: normal;
+    color: #555555;
+}
+
+.ui-dialog-titlebar-close:hover {
+    border: 1px solid #999;
+}
+
+.selectCSS {
+    width: 115px;
+    padding: 2px;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+
+.productQTYInput {
+    width: 50%;
+    padding: 2px;
+}
+
+.QTYSubmitBtn {
+    padding: 2px;
+    min-width: 53px;
+}
+
+.qtyRemoveTDLast, .qtyAddTDLast {
+    min-width: 166px;
+}
+
+.bg-black {
+    /* . navbar-inverse */
+    color: #fff;
+    padding: 5px;
+    margin: 0 0 10px 0;
+    font-size: 15px;
+}
+
+.notifications {
+    width: 400px;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 999;
+
+}
+
+.notification {
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 8px 0;
+
+}
+
+.notification:hover {
+    opacity: 1 !important;
+}
+
+.notification .notification_close {
+    position: absolute;
+    right: 0px;
+    background: #999;
+    padding: 3px 9px;
+    color: #000;
+    z-index: 3;
+    font-weight: bold;
+    cursor: pointer;
+    height: 27px;
+}
+
+.notification .notification_text {
+    padding: 2px 8px 6px;
+    color: #fff;
+    font-family: arial;
+    text-shadow: 0px 0px 1px #000;
+    min-height: 50px;
+}
+
+.notification_text.btn-warning {
+    color: #000;
+    text-shadow: none;
+}
+
+.notification .notification_heading {
+    font-weight: bold;
+    font-size: 14px;
+    padding: 5px 5px 4px 6px;
+    color: #fff;
+    height: 27px;
+}
+
+#vendorProdcutList tr:hover {
+    color: #000;
+}
+
+.trChecked {
+    color: #000;
+}
+
+.editShipping {
+    position: absolute;
+    top: -6px;
+    right: 35px;
+}
+.deleteShipping {
+    position: absolute;
+    top: -6px;
+    right: 0px;
+}
+
+.editShipping:hover,.deleteShipping:hover {
+    background: #fff;
+}
+
+.combineicon {
+    position: absolute;
+    left: 10px;
+    top: 7px;
+}
+
+#reportSelectedProduct table td, #reportSelectedProduct table th {
+    padding: 4px 5px;
+}
+
+#reportSelectedProduct table th {
+    font-size: 11px;
+}
+
+#reportSelectedProduct table input {
+    display: none;
+}
+table td{
+    position: relative;
+}
+
+.reportReview .form-group {
+    margin-bottom: 2px;
+    font-size: 12px;
+}
+
+.orderAddProductNotAllow {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    background: yellow;
+    z-index: 9;
+    opacity: 0.2;
+    cursor: not-allowed;
+}
+
+.newProduct {
+    position: relative;
+}
+
+.singleAlbum {
+    display: inline-block;
+    width: 210px;
+    text-align: center;
+    border: 2px solid #eee;
+    height: 210px;
+    position: relative;
+    margin: 7px;
+    float: left;
+    height: 250px;
+}
+
+.albumMange {
+    position: absolute;
+    bottom: 0;
+    background: #eee;
+    padding: 4px 0;
+}
+
+.singleAlbum .albumImage {
+    height: 155px;
+    width: 100%;
+    display: inline-block;
+    margin-top: 4px;
+}
+
+.singleAlbum .albumImage img {
+    max-height: 100%;
+    max-width: 100%;
+    display: inline-block;
+}
+
+.albumSortTop {
+    background: #ccc;
+    height: 20px;
+    cursor: move;
+}
+
+#dropbox .message {
+    display: block !important;
+    color: #fff;
+    position: absolute;
+    left: 40%;
+    bottom: 0;
+}
+
+#dropbox {
+    padding-bottom: 100px !important;
+}
+
+.allProductInfo {
+    float: left;
+    width: 225px;
+    padding: 5px;
+    background: #ddd;
+    margin: 8px;
+    height: 200px;
+    position: relative;
+}
+
+.allProductInfo .pName{
+    position: absolute;
+    bottom: 0;
+    left:0;
+    background: #ccc;
+    width: 100%;
+    text-align: center;
+}
+.allProductInfo .oldPrice {
+    font-size: 11px;
+    text-decoration: line-through;
+    color: red;
+}
+.allProductInfo .pImg {
+    height: 160px;
+    text-align: center;
+    width: 100%;
+}
+.allProductInfo .pImg img{
+    max-height: 100%;
+    max-width: 100%;
+}
+.relative{
+    position: relative;
+}
+.relative.panel .panel-heading{
+padding-left: 34px;
+    }
+.menu_action{
+    top: 3px;
+    position: absolute;
+    right: 5px;
+}
+.menuSortDiv {
+    display: inline-block;
+    float: left;
+    padding: 9px 9px;
+    position: absolute;
+    left: 0;
+    cursor: move;
+    background: #ccc;
+    top: 0;
+    color: #000;
+    font-weight: bold;
+}
+
+/*graph link hide*/
+svg > text[text-anchor="end"]{
+    display:none !important;
+}
+.graphDiv{
+    height:350px;
+}
+
+.no-wrap{
+    white-space: nowrap;
+}
+
+.countMeDiv{
+    color: #222222;
+    font-size: 18px;
+    font-weight: bold;
+}
+.heading_invoice h2{
+    float:left;
+}
+.heading_invoice .countMeDiv{
+    float: right;
+    position: relative;
+    top: 0px;
+    margin-top: 20px;
+}
+.heading_invoice{
+    display: inline-block;
+    width: 100%;
+}
+.invoice_price_div {
+    display: inline-block;
+    background-color: #A2A0A0;
+    padding: 2px 9px;
+    border-radius: 9px;
+    margin: 0 2px;
+    min-width: 65px;
+    text-align: center;
+}
+
+.tab-content .container-fluid{
+    position: relative;
+}
+
+.tableIBMS .custom_width {
+    width: 110px;
+}
+
+#pro_cat>ul, #pro_cat>li {
+    list-style: none;
+}

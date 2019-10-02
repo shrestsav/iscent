@@ -1,0 +1,3 @@
+SHELL="/usr/local/cpanel/bin/jailshell"
+0 0 * * * /usr/bin/curl -A cron http://sharkspeed.com/cron/cronTasks.php?time=daily >/dev/null 2>&1
+

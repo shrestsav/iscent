@@ -1,0 +1,7 @@
+[19-Feb-2019 16:53:28 Asia/Dubai] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/iscent/public_html/new/myAdmin/functions/decrypt.php(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(1) : eval()'d code(12) : eval()'d code:15) in /home/iscent/public_html/new/_models/functions/webProduct_functions.php on line 8864
+[26-Feb-2019 06:37:12 UTC] PHP Warning:  session_start(): Cannot send session cache limiter - headers already sent (output started at /home/iscent/public_html/new/products.php:3) in /home/iscent/public_html/new/global.php on line 15
+[13-Apr-2019 14:05:23 UTC] PHP Warning:  session_start(): Cannot send session cache limiter - headers already sent (output started at /home/iscent/public_html/new/viewOrder.php:1) in /home/iscent/public_html/new/global.php on line 15
+[04-Jul-2019 10:38:07 UTC] PHP Fatal error:  Class 'object_class' not found in /home/iscent/public_html/new.php on line 3
+[04-Jul-2019 10:38:56 UTC] PHP Fatal error:  Class 'object_class' not found in /home/iscent/public_html/new.php on line 3
+[14-Jul-2019 23:21:21 UTC] PHP Fatal error:  Class 'object_class' not found in /home/iscent/public_html/new.php on line 3
+[31-Jul-2019 01:52:22 UTC] PHP Fatal error:  Class 'object_class' not found in /home/iscent/public_html/new.php on line 3

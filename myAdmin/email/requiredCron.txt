@@ -1,0 +1,3 @@
+SHELL="/usr/local/cpanel/bin/jailshell"
+
+* * * * * php -q /home/imediaserver/public_html/projects/ecron/cron/cron.php

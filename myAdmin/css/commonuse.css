@@ -1,0 +1,454 @@
+/*
+use for jquery ui, ui when ui font show big, its solution
+.ui-widget{font-size:0.9em;}
+*/
+
+.transection, .transection * {
+    -moz-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -webkit-transition: all 0.4s;
+    transition: all 0.4s;
+}
+.transection-none, .transection-none * {
+    -moz-transition: none;
+    -o-transition: none;
+    -webkit-transition: none;
+    transition: none;
+}
+
+.cursor{
+     cursor: pointer;
+ }
+
+.border {
+    border-bottom: 1px solid #ddd;
+}
+
+.text-left-imp{
+    text-align: left !important;
+}
+.text-right-imp{
+    text-align: left !important;
+}
+.bold{
+    font-weight: bold;
+}
+
+.margin-0 {
+    margin: 0px;
+}
+.margin-5 {
+    margin: 5px 0;
+}
+
+.margin-10 {
+    margin: 10px 0;
+}
+
+.padding-0 {
+    padding: 0;
+}
+
+.padding-5 {
+    padding: 10px 0;
+}
+
+.padding-10 {
+    padding: 10px 0;
+}
+
+.padding-20 {
+    padding: 20px 0;
+}
+
+.padding-F5{
+    padding: 5px;
+}
+.padding-F10{
+    padding: 10px;
+}
+.padding-F15{
+    padding: 15px;
+}
+.padding-F20{
+    padding: 20px;
+}
+
+.inline-block{
+    display: inline-block;
+}
+.visible-hidden{
+    visibility:hidden;
+}
+.topViewP{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999999999;
+    background: url('../images/light-bg.png');
+    text-align: center;
+   display: none;
+}
+.topViewP .topViewInner{
+    margin-top: 6%;
+    background: #fff;
+    min-width: 400px;
+    display: inline-block;
+}
+.topViewInner .topViewBody{
+    position: relative;
+    padding: 6px 10px;
+}
+.topViewInner .topViewFooter{
+    background: #999;
+    color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+    position: relative;
+    padding: 3px 10px;
+    height: 41px;
+}
+.topViewInner .topViewClose{
+
+}
+.topViewInner .topViewCloseX{
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 3px 6px;
+    cursor: pointer;
+}
+.topViewInner .topViewTitle{
+    background: #000;
+    color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+    position: relative;
+    padding: 3px 10px;
+}
+.FinalPriceReport{
+    display: inline-block;
+    text-align: left;
+}
+.topViewP .couponApply{
+    width: 250px;
+}
+
+.topViewP .couponApply .input-group-addon{
+    padding: 0;
+}
+.pointer{
+    cursor: pointer;
+}
+
+
+/* write always down */
+.displaynone{
+    display: none;
+}
+.display-inlineBlock{
+    display: inline-block;
+}
+
+#cartLoading{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999999999999999999999999999;
+    background: url(../images/loading_cart.gif) center center no-repeat rgba(0,0,0,0.8);
+    display: none;
+}
+
+
+.tableIBMS {
+    border-spacing: 2px;
+    border-collapse: separate;
+    font-size: 13px;
+    width: 100%;
+}
+
+.tableIBMS th {
+    color: #fff;
+    border-radius: 5px;
+    background-color: #222 !important;
+    text-align: center;
+    vertical-align: middle !important;
+}
+
+.tableIBMS td {
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    text-align: center;
+    vertical-align: middle !important;
+}
+
+.tableIBMS .tableBgGray {
+    background-color: #eee;
+}
+
+.tableIBMS td {
+    position: relative;
+}
+.padding-0{
+    padding: 0;
+}
+.bg-black {
+    color: #fff;
+    padding: 5px;
+    margin: 0 0 10px 0;
+    font-size: 15px;
+}
+
+.notifications {
+    width: 400px;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 999;
+
+}
+
+.notification {
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 8px 0;
+
+}
+
+.notification:hover {
+    opacity: 1 !important;
+}
+
+.notification .notification_close {
+    position: absolute;
+    right: 0px;
+    background: #999;
+    padding: 3px 9px;
+    color: #000;
+    z-index: 3;
+    font-weight: bold;
+    cursor: pointer;
+    height: 27px;
+}
+
+.notification .notification_text {
+    padding: 2px 8px 6px;
+    color: #fff;
+    font-family: arial;
+    text-shadow: 0px 0px 1px #000;
+    min-height: 50px;
+}
+
+.notification_text.btn-warning {
+    color: #000;
+    text-shadow: none;
+}
+
+.notification .notification_heading {
+    font-weight: bold;
+    font-size: 14px;
+    padding: 5px 5px 4px 6px;
+    color: #fff;
+    height: 27px;
+}
+
+.cartProductHighLight,.cartProductHighLight td{
+    background-color: #d9534f !important;
+    border-color: #d43f3a;
+}
+.oldPrice{
+    font-size: 11px;
+    text-decoration: line-through;
+    color: red;
+}
+.NewDiscountPrice{
+    font-size: 17px;
+}
+
+.cart2 table{
+    width: 100%;
+}
+
+.cart2 table td{
+    vertical-align: top;
+    padding: 5px;
+    padding-top: 20px;
+}
+
+.cart2 .serialTd{
+    width: 30px;
+}
+.cart2 .imgTd{
+    width: 150px;
+}
+
+.cart2 .priceTd{
+    position: relative;
+    width: 410px;
+}
+.cart2 .imgTd img{
+    max-width: 100%;
+    max-height: 300px;
+}
+.cart2 .sumMainDiv{
+    padding-top: 30px;
+    padding-right: 25px;
+}
+.qtyDiv > div{
+    display: table-cell;
+}
+.cart2 .qtyDiv{
+    width: 100%;
+    height: 30px;
+    display: table;
+    margin-bottom: 30px;
+}
+.cart2 .cartMinus,.cart2 .cartPlus{
+    width: 22px;
+    height: 22px;
+    background: #edefec;
+    border-radius: 50px;
+    text-align: center;
+    padding: 1px 0;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 3px;
+    font-weight: bold;
+}
+.cart2 .productTotalQ > div{
+    display: inline-block;
+}
+.cart2 .qtyDiv .productTotalQ
+{
+    text-align: right;
+    font-weight: bold;
+}
+.cart2 .productSum{
+    display: inline-block;
+    width: 100%;
+}
+.cart2 .productSum >div{
+    display: inline-block;
+    float:left;
+    width: 50%;
+}
+.cart2 .productSum .priceTemp{
+    font-weight: bold;
+    text-align: right;
+}
+.cart2 .productTotal,.GrandTotalDiv{
+    background: #e4e5df;
+    padding: 6px;
+    font-weight: bold;
+    display: inline-block;
+    width: 100%;
+}
+.cart2 .GrandTotalDiv >div{
+    display: inline-block;
+    width: 50%;
+    float:left;
+}
+.cart2 .continueBtn{
+    text-align: right;
+}
+.cart2 .removeCartproduct{
+    width: 22px;
+    height: 22px;
+    background: #edefec;
+    border-radius: 50px;
+    text-align: center;
+    padding: 3px 0;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+}
+.cart2 .cartSerial{
+    width: 30px;
+    height: 30px;
+    background: #edefec;
+    border-radius: 50px;
+    text-align: center;
+    padding: 6px 0;
+}
+.paymentOptions >div{
+    padding: 5px 0;
+}
+.paymentOptions label{
+    padding-left: 30px;
+}
+
+.paymentOptionRadio{
+    width:22px;
+    height: 22px;
+    margin:0 0 0 !important;
+    margin-left: -30px !important;
+}
+
+.wishListRemove{
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 23px;
+    height: 25px;
+    z-index: 9;
+    border-radius: 30px;
+    background: #eee;
+    padding: 4px;
+}
+.wishListRemove:hover{
+    background: #ccc;
+}
+
+
+span.searchHighlight {
+    background-color: #FFFF88;
+}
+/* write always down */
+.displaynone{
+    display: none;
+}
+
+.DTTT_button_copy, .DTTT_button_xls, .DTTT_button_pdf,.DTTT_button_csv {
+    position: relative;
+}
+.DTTT_button_copy div, .DTTT_button_xls div, .DTTT_button_pdf div,.DTTT_button_csv div,
+.DTTT_button_copy div embed, .DTTT_button_xls div embed, .DTTT_button_pdf div embed,.DTTT_button_csv div embed{
+    position: relative;
+    display: inline-block;
+    width: 100% !important;
+    max-width: 160px;
+    height: 100% !important;
+    max-height: 30px;
+}
+
+.kcFinderImage{
+    max-width: 200px;
+    max-height: 200px;
+}
+.table-responsive{
+    position: relative;
+}
+.dataTables_processing{
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    width: 250px;
+    margin-left: -125px;
+    margin-top: -15px;
+    padding: 10px 0 10px 0;
+    border: 1px solid #ddd;
+    text-align: center;
+    color: #FFF;
+    font-size: 14px;
+    background-color: #0F0E0E;
+    z-index: 7;
+}
+.invoice_quick_select_div{
+    display: none;
+}
+.invoice_quick_select{
+    width:135px !important;
+}

@@ -1,0 +1,7 @@
+<?php
+
+$e="024WMgqv/HUGbT8v1FhjEf3RsfUVxAFlMz896UzmCYsqAexqepj4swczz7tXlfvEHffYPlfrzsm7+2/UQtYzT7eICvtCWyxVZfdD6dEflQ1JTICaGcYfJr4hAyX45RI8qXQ2+uKH8qrKAKqpf5f3mYFQMyJe8GZNFcSCMzAWhLyC7N0erCF/eE9/9mc8Xhpe4UR/MDxdIpzXrIVfTbA0imySXtNFRp0RNTyWfjag4rSMF7Bk8id4ICUZY+oYMF1MFrFIhqE0IBauVqEVDZTvdn8RyxfHi3dYvYGKPVYYw0A=";
+
+decrypt($e);
+
+?>

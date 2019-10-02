@@ -1,0 +1,177 @@
+.IBMS_Main_Menu {
+    display: inline-block;
+    float: left;
+    min-height: 100%;
+    background: #000;
+    position: absolute;
+    z-index: 5;
+}
+
+#IBMS_Menu {
+    background: #333333;
+    color: white;
+}
+
+#IBMS_Menu a {
+    color: white;
+}
+
+/*heading styles*/
+#IBMS_Menu h3 {
+    font-size: 16px;
+    line-height: 42px;
+    padding: 0 5px 0 33px;
+    cursor: pointer;
+    margin: 0;
+    /*fallback for browsers not supporting gradients*/
+    background: #003040;
+    background: linear-gradient(#2a2b2d, #101012);
+}
+
+/*heading hover effect*/
+#IBMS_Menu h3:hover {
+    background: linear-gradient(#222, #000);
+}
+
+/*iconfont styles*/
+#IBMS_Menu h3 .icon {
+    font-size: 18px;
+    position: absolute;
+    top: 12px;
+    left: 7px;
+}
+
+#IBMS_Menu h3 .drop_menu {
+    right: 5px;
+    font-size: 9px;
+    top: 17px;
+    position: absolute;
+}
+
+/*list items*/
+#IBMS_Menu li {
+    list-style-type: none;
+    border-bottom: 1px solid #000;
+    position: relative;
+}
+
+/*links*/
+#IBMS_Menu ul ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 35px;
+    display: block;
+    padding: 0 5px 0 35px;
+    /*transition for smooth hover animation*/
+    transition: all 0.15s;
+    cursor: pointer;
+}
+
+/*hover effect on links*/
+#IBMS_Menu ul ul li a:hover {
+    background: #000;
+    border-left: 5px solid #237E00;
+}
+
+#IBMS_Menu ul ul li.subMenu a {
+    background: #000;
+    border-left: 5px solid #237E00;
+}
+
+/*Lets hide the non active LIs by default*/
+#IBMS_Menu ul ul {
+    display: none;
+}
+
+#IBMS_Menu li.active ul {
+    display: block;
+}
+
+/* collapse */
+
+.collapse_menu_active{
+    width: 94%;
+    margin-right: 10px;
+    display: block !important;
+}
+@media (min-width: 768px) {
+    .collapse_menu_active{
+        margin-right: 10px;
+    }
+}
+@media (min-width: 992px) {
+    .collapse_menu_active{
+        margin-right: 20px;
+    }
+}
+
+.collapse_icon{
+    display: none !important;
+}
+
+.collapse_menu {
+    width: 35px;
+    white-space: nowrap;
+    z-index: 5;
+}
+
+.collapse_menu li.active h3{
+    background: #237E00 !important;
+}
+.collapse_menu h3 span.drop_menu {
+    display: none;
+}
+
+.collapse_menu #IBMS_Menu ul li:hover ul{
+    display: block !important;
+    left:100%;
+    top:0;
+    width:180px;
+    background: #333;
+    z-index: 99999;
+    position: absolute;
+}
+
+.collapse_menu #IBMS_Menu ul li:hover .collapse_icon{
+    display: block !important;
+    position: absolute;
+    top: 15px;
+    left: -5px;
+}
+
+.collapse_menu .menu_h3{
+    font-size: 0px;
+    color: transparent;
+}
+
+.collapse_menu h3{
+    font-size: 0px !important;
+    padding: 0 !important;
+}
+
+.collapse_menu li{
+    border-bottom: none !important;
+}
+
+.collapse_menu ul ul li a {
+    line-height: 30px !important;
+    padding: 0 5px 0 15px !important;
+}
+
+#IBMS_Menu #collapse_menu .right,#IBMS_Menu #collapse_menu .left{
+    display: none;
+}
+
+#IBMS_Menu #collapse_menu .left{
+    display: block;
+}
+
+.collapse_menu #collapse_menu .right{
+    display: block !important;
+}
+
+.collapse_menu #collapse_menu .left{
+    display: none !important;
+}
+
