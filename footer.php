@@ -15,7 +15,17 @@
 							<?php
 								$mainMenu = $menuClass->menuTypeSingle('main');
 								foreach ($mainMenu as $val) {
-									echo '<li><a href="' . $val['link'] . '">' . $val['name'] . '</a></li>';
+									$menuID = $val['id'];
+									$subMenu = $menuClass->menuTypeSingle('main', $menuID);
+									if(empty($subMenu)){
+										echo '<li><a href="' . $val['link'] . '">' . $val['name'] . '</a></li>';
+									}
+									elseif(!empty($subMenu)){
+										foreach ($subMenu as $val2){
+											echo '<li><a href="' . $val2['link'] . '">' . $val2['name'] . '</a></li>';
+										}
+									}
+									
 								}
 							?>
 						</ul>
@@ -72,8 +82,15 @@
 <script src="<?php echo WEB_URL ?>/codeilo/bootstrap/js/bootstrap.min.js"></script>
 <script src="<?php echo WEB_URL ?>/codeilo/slick/slick/slick.js"></script>
 <script src="<?php echo WEB_URL ?>/codeilo/js/custom.js"></script>
+<script src="<?php echo WEB_URL?>/js/jquery_ui.js"></script>
 
+<script type="text/javascript">
 
+    $(document).ready(function(){
+        $(".datepicker").datepicker();
+    });
+
+</script>
 <!--Start of Tawk.to Script-->
 
 <!-- <script type="text/javascript">

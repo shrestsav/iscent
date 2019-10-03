@@ -243,7 +243,33 @@ break;
 //my code
 ?>
 
-<div class="bg_inner" style="background-image: url(<?php echo WEB_URL.'/images/default_banner.jpg' ?>)"></div>
+<style type="text/css">
+.subscription-bg {
+    background: url('<?= WEB_URL.'/images/default_banner.jpg' ?>') no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+</style>
+
+<section class="subscription-bg page-banner">
+    <div class="page-heading">
+        <h2>
+            <?php 
+                if (!isset($_GET['view']) && !isset($_GET['editCustom']) && !isset($_GET['pId'])) {
+
+                    $dbF->hardWords('Order list');
+
+                } else {
+
+                    $dbF->hardWords('Order Invoice Information');
+
+                }
+            ?>
+        </h2>
+    </div>
+</section>
+
+<!-- <div class="bg_inner" style="background-image: url(<?php echo WEB_URL.'/images/default_banner.jpg' ?>)"></div> -->
 
     <div class="container-fluid padding-0 inner_details_container">
         <?php //$dbF->prnt($_REQUEST); ?>
@@ -251,11 +277,11 @@ break;
 
 
             <div class="home_links_heading h3 well well-sm">
-<a href="#" onclick="goBack()">
+            <a href="<?= WEB_URL.'/profile.php' ?>" onclick="goBack()">
                 <?php $dbF->hardWords('Back'); ?>
                 </a>
             </div>
-            <div class="home_links_heading h3 well well-sm"><?php
+ <!--            <div class="home_links_heading h3 well well-sm"><?php
 
 
 
@@ -271,7 +297,7 @@ break;
 
 
 
-                ?></div>
+                ?></div> -->
 
             <div class="inner_content_page_div container-fluid">
 

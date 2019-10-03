@@ -24,7 +24,7 @@ if ($userId == '0') {
 
 
 
-include("header.php");
+// include("header.php");
 
 require_once(__DIR__ . '/' . ADMIN_FOLDER . '/order/classes/order.php');
 
@@ -99,7 +99,7 @@ function goBack() {
 
 <style>
 
-.home_links_heading {
+/*.home_links_heading {
 
     min-height: 40px;
 
@@ -117,7 +117,7 @@ function goBack() {
 
     margin-bottom: 20px;
 
-}
+}*/
 
 .inner_content_page_div {
 

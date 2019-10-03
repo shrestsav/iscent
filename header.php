@@ -83,9 +83,9 @@ $functions->updateInvoiceFromTelr();
 										<a href="<?= WEB_URL ?>/page-contact" class="mail-link">
 											<img src="<?= WEB_URL ?>/codeilo/images/contact-white.svg" alt="">
 										</a>
-										<a href="#" class="cart-link">
+										<!-- <a href="#" class="cart-link">
 											<img src="<?= WEB_URL ?>/codeilo/images/cart-white.svg" alt="">
-										</a>
+										</a> -->
 										<?php 
 											$url = '/login';
 											$icon = 'user-white.svg';

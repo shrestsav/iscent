@@ -1,370 +1,372 @@
-<?php include_once("global.php");
+<?php 
 
+include_once("global.php");
 global $webClass;
 
 if($seo['title']==''){
-
-$seo['title'] = 'User Profile';
-
+    $seo['title'] = 'User Profile';
 }
 
 $login = $webClass->userLoginCheck();
 
-if(!$login){
-
-header('Location: login');
-
-exit();
-
-}
+    if(!$login){
+    header('Location: login');
+    exit();
+    }
 
 $user_id = $webClass->webUserId();
 $user_name = $webClass->webUserName($user_id);
 
-
-
 $msg = $webClass->webUserEditSubmit();
-
 include("header.php");
-
 require_once(__DIR__ . '/' . ADMIN_FOLDER . '/order/classes/order.php');
-
 $orderC = new order();
 
 ?>
 
-<div class="bg_inner" style="background-image: url(<?php echo WEB_URL.'/images/default_banner.jpg' ?>)"></div>
+<style type="text/css">
+
+.profile-bg {
+    background: url('<?= WEB_URL.'/images/default_banner.jpg' ?>') no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+</style>
+
+<section class="profile-bg page-banner">
+    <div class="page-heading">
+        <h2>Profile</h2>
+    </div>
+</section>
+
+<!-- <div class="bg_inner" style="background-image: url(<?= WEB_URL.'/images/default_banner.jpg' ?>)"></div> -->
 
 <!--Inner Container Starts-->
 
 <div class="container-fluid padding-0">
+    <div class="standard">
+        <?php
+        if(isset($_GET['page'])){
+            ?>
 
-<div class="standard">
-
-<?php
-
-if(isset($_GET['page'])){
-
-?>
-
- <div class="home_links_heading h3 well well-sm">
-<a href="#" onclick="goBack()">
-                <?php $dbF->hardWords('Back'); ?>
+            <div class="home_links_heading h3 well well-sm">
+                <a href="#" onclick="goBack()">
+                    <?php $dbF->hardWords('Back'); ?>
                 </a>
             </div>
 
 
 
-<?php
+            <?php
 
 
 
 
- echo '<div class="home_links_heading h3 well well-sm">';
-$page = $_GET['page'];
-echo htmlentities($_GET['page']);
+            echo '<div class="home_links_heading h3 well well-sm">';
+            $page = $_GET['page'];
+            echo htmlentities($_GET['page']);
 
-echo "</div>";
+            echo "</div>";
 
-}else{
-echo '<div class="home_links_heading h3 well well-sm">
+        }else{
+            echo '<div class="home_links_heading h3 well well-sm">
 
-<span style="float: left;">
-Welcome '.$user_name.'
-</span>
+            <span style="float: left;">
+            Welcome '.$user_name.'
+            </span>
 
-<span style="float: right;">
-<a href="'.WEB_URL.'/profile?page=Profile">Edit Profile </a>
-</span>
+            <span style="float: right;">
+            <a href="'.WEB_URL.'/profile?page=Profile">Edit Profile </a>
+            </span>
 
 
-</div>';
-}
+            </div>';
+        }
 
-if(isset($_GET['update'])):
+        if(isset($_GET['update'])):
 
-?>
+            ?>
 
 
-<div class="alert alert-warning">
-<strong>Warning!</strong> Please update your password.
-</div>
-<style type="text/css">
+            <div class="alert alert-warning">
+                <strong>Warning!</strong> Please update your password.
+            </div>
+            <style type="text/css">
 
-.hide{
-visibility: hidden;
-}
+            .hide{
+                visibility: hidden;
+            }
 
-</style>
-<?php endif; ?>
+        </style>
+    <?php endif; ?>
 
-<div class="inner_content_page_div container-fluid">
+    <div class="inner_content_page_div container-fluid row">
 
-<?php if(!isset($_GET['page'])){ ?>
+        <?php if(!isset($_GET['page'])){ ?>
 
-<div class="wrapper_main">
-<div class="wrapper">
-<h4>Schedule</h4>
-<a href="<?php echo WEB_URL; ?>/profile?page=schedule" class="n_btn">View All</a>
-<div class="wrapper_txt">
-<?php 
-$avail_call = $orderC->allScheduleData($user_id, true);
+            <div class="wrapper_main col-md-7">
+                <div class="wrapper contWrap">
+                    <h4>Schedule</h4>
+                    <a href="<?php echo WEB_URL; ?>/profile?page=schedule" class="n_btn">View All</a>
+                    <div class="wrapper_txt">
+                        <?php 
+                        $avail_call = $orderC->allScheduleData($user_id, true);
 
-foreach ($avail_call as $key => $value) {
-echo '<p>'.$value['schedule_date'].'</p>';
-echo '<p>'.$value['schedule_slot'].'</p>';
-}
+                        foreach ($avail_call as $key => $value) {
+                            echo '<p>'.$value['schedule_date'].'</p>';
+                            echo '<p>'.$value['schedule_slot'].'</p>';
+                        }
+                        ?>
+                    </div>
+                </div>
+                <div class="wrapper contWrap">
+                    <h4>Subscription Plan</h4>
+                    <a href="<?php echo WEB_URL; ?>/viewOrder" class="n_btn">View All</a>
+                    <div class="wrapper_txt">
+                        <?php 
+                        $open_orders = $orderC->allOpenOrders($user_id);
 
+                        foreach ($open_orders as $key => $value) {
+                            $pId = $value['product_id'];
+                            $order_id = $value['order_id'];
+                            $del_request = $value['del_request'];
 
-?>
-</div>
-</div>
+                            // $payment_mode = $value['payment_mode'];
+                            // $price_per_month = $value['price_per_month'];
 
-<div class="wrapper">
-<h4>Subscription Plan</h4>
 
+                            $sql = "SELECT `prodet_name`,`prodet_shortDesc` FROM `proudct_detail` WHERE `prodet_id` = ?";
+                            $res = $dbF->getRow($sql, array($pId));
 
-<a href="<?php echo WEB_URL; ?>/viewOrder" class="n_btn">View All</a>
-<div class="wrapper_txt">
-<?php 
-$open_orders = $orderC->allOpenOrders($user_id);
+                            $prodet_name = translateFromSerialize($res['prodet_name']);
+                            $prodet_shortDesc = translateFromSerialize($res['prodet_shortDesc']);
 
-foreach ($open_orders as $key => $value) {
-$pId = $value['product_id'];
-$order_id = $value['order_id'];
-$del_request = $value['del_request'];
 
-// $payment_mode = $value['payment_mode'];
-// $price_per_month = $value['price_per_month'];
+                            echo '<p>'.$prodet_name.'</p>';
+                            echo '<p>'.$prodet_shortDesc.'</p>';
 
 
-$sql = "SELECT `prodet_name`,`prodet_shortDesc` FROM `proudct_detail` WHERE `prodet_id` = ?";
-$res = $dbF->getRow($sql, array($pId));
+                            $sqli = "SELECT `setting_val` FROM `product_setting` WHERE `p_id` = ? and `setting_name` = ?";
+                            $resi = $dbF->getRow($sqli, array($pId,"cancel_charges"));
+                            $cancel_charges = ($resi['setting_val']);
 
-$prodet_name = translateFromSerialize($res['prodet_name']);
-$prodet_shortDesc = translateFromSerialize($res['prodet_shortDesc']);
 
 
-echo '<p>'.$prodet_name.'</p>';
-echo '<p>'.$prodet_shortDesc.'</p>';
+                            $sqlj = "SELECT `setting_val` FROM `product_setting` WHERE `p_id` = ? and `setting_name` = ?";
+                            $resj = $dbF->getRow($sqlj, array($pId,"actual_expire"));
+                            $actual_expire = ($resj['setting_val']);
 
 
-$sqli = "SELECT `setting_val` FROM `product_setting` WHERE `p_id` = ? and `setting_name` = ?";
-$resi = $dbF->getRow($sqli, array($pId,"cancel_charges"));
-$cancel_charges = ($resi['setting_val']);
+                            // echo '<a data-id="'.$order_id.'" onclick="delOrderInvoice(this);" class="n_btn1">';
 
 
 
-$sqlj = "SELECT `setting_val` FROM `product_setting` WHERE `p_id` = ? and `setting_name` = ?";
-$resj = $dbF->getRow($sqlj, array($pId,"actual_expire"));
-$actual_expire = ($resj['setting_val']);
+                            if($del_request == 1){
+                                echo '<a class="n_btn1">';
 
+                                echo'Canceled</a>';
 
-// echo '<a data-id="'.$order_id.'" onclick="delOrderInvoice(this);" class="n_btn1">';
+                            }else{
+                                echo '<a data-id="'.$order_id.'" data-exp="'.$actual_expire.'" data-fee="'.$cancel_charges.'" onclick="delOrderInvoice(this);" class="n_btn1">';
 
+                                echo'Cancel Subscription</a>';
 
 
-if($del_request == 1){
-echo '<a class="n_btn1">';
+                            }
+                            echo '<hr>';
+                        }
 
-echo'Canceled</a>';
 
-}else{
-echo '<a data-id="'.$order_id.'" data-exp="'.$actual_expire.'" data-fee="'.$cancel_charges.'" onclick="delOrderInvoice(this);" class="n_btn1">';
+                        ?>
+                    </div>
+                </div>
 
-echo'Cancel Subscription</a>';
+                <div class="wrapper contWrap">
+                    <h4>Support</h4>
+                    <a data-toggle="modal" id="openSupport" data-target="#message_modal" class="n_btn">New Query</a>
+                    <div class="wrapper_txt">
+                        <?php 
 
+                        $sql = "SELECT `message`,`message_by` FROM `user_messages` WHERE `user_id` = ? ORDER BY `date` DESC LIMIT 1";
+                        $res = $dbF->getRow($sql, array($user_id));
 
-}
-echo '<hr>';
-}
+                        if($dbF->rowCount>0){
 
+                            echo '<p>'.$res['message'].' ( '.$res['message_by'].' )</p>';
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div><!--wrapper_main-->
 
-?>
-</div>
-</div>
+        <?php } ?>
 
-<div class="wrapper">
-<h4>Support</h4>
- <a data-toggle="modal" id="openSupport" data-target="#message_modal" class="n_btn">New Query</a>
-<div class="wrapper_txt">
-<?php 
 
-$sql = "SELECT `message`,`message_by` FROM `user_messages` WHERE `user_id` = ? ORDER BY `date` DESC LIMIT 1";
-$res = $dbF->getRow($sql, array($user_id));
+        <?php
 
-        if($dbF->rowCount>0){
+        if(!isset($_GET['page'])){
 
-echo '<p>'.$res['message'].' ( '.$res['message_by'].' )</p>';
-}
-?>
-</div>
-</div>
-</div><!--wrapper_main-->
+            ?>
 
-<?php } ?>
 
+            <div class="wrapper_main2 col-md-5">
 
-<?php
+                <div class="row">
+                    <!-- <div class="col-sm-6 text-center padding-0">
 
-if(!isset($_GET['page'])){
+                    <a href="<?php# echo WEB_URL;?>/profile?page=Profile">
 
-?>
+                    <img src="<?php #echo WEB_URL;?>/images/profile.png" width="90">
 
+                    <div><?php #$dbF->hardWords('Customer Profile'); ?></div>
 
-<div class="wrapper_main2">
+                    </a>
 
-<!-- <div class="col-sm-6 text-center padding-0">
+                    </div> -->
 
-<a href="<?php# echo WEB_URL;?>/profile?page=Profile">
 
-<img src="<?php #echo WEB_URL;?>/images/profile.png" width="90">
 
-<div><?php #$dbF->hardWords('Customer Profile'); ?></div>
+                    <?php if($functions->developer_setting('cartSystem') == '1'){ ?>
 
-</a>
+                        <div class="col-sm-6 text-center padding-0">
 
-</div> -->
+                            <a href="<?php echo WEB_URL;?>/viewOrder">
 
+                                <img src="<?php echo WEB_URL;?>/images/cartorder.png" width="90">
 
+                                <div><?php $dbF->hardWords('Orders');?></div>
 
-<?php if($functions->developer_setting('cartSystem') == '1'){ ?>
+                            </a>
 
-<div class="col-sm-6 text-center padding-0">
+                        </div>
 
-<a href="<?php echo WEB_URL;?>/viewOrder">
+                    <?php } ?>
 
-<img src="<?php echo WEB_URL;?>/images/cartorder.png" width="90">
 
-<div><?php $dbF->hardWords('Orders');?></div>
 
-</a>
+                    <?php if($functions->developer_setting('return_Product_from_client') == '1'){ ?>
 
-</div>
+                        <div class="col-sm-6 text-center padding-0">
 
-<?php } ?>
+                            <a href="<?php echo WEB_URL;?>/productReturn">
 
+                                <img src="<?php echo WEB_URL;?>/images/returnorder.png" width="90">
 
+                                <div><?php $dbF->hardWords('Return');?></div>
 
-<?php if($functions->developer_setting('return_Product_from_client') == '1'){ ?>
+                            </a>
 
-<div class="col-sm-6 text-center padding-0">
+                        </div>
 
-<a href="<?php echo WEB_URL;?>/productReturn">
+                    <?php } ?>
 
-<img src="<?php echo WEB_URL;?>/images/returnorder.png" width="90">
 
-<div><?php $dbF->hardWords('Return');?></div>
 
-</a>
+                    <?php if($functions->developer_setting('defect_Product_from_client') == '1'){ ?>
 
-</div>
+                        <div class="col-sm-6 text-center padding-0">
 
-<?php } ?>
+                            <a href="<?php echo WEB_URL;?>/productDefect">
 
+                                <img src="<?php echo WEB_URL;?>/images/defect.png" height="90" width="">
 
+                                <div><?php $dbF->hardWords('Defect');?></div>
 
-<?php if($functions->developer_setting('defect_Product_from_client') == '1'){ ?>
+                            </a>
 
-<div class="col-sm-6 text-center padding-0">
+                        </div>
 
-<a href="<?php echo WEB_URL;?>/productDefect">
+                    <?php } ?>
 
-<img src="<?php echo WEB_URL;?>/images/defect.png" height="90" width="">
 
-<div><?php $dbF->hardWords('Defect');?></div>
 
-</a>
+                    <!--<div class="col-sm-2 text-center padding-0">
 
-</div>
+                    <a href="<?php /*echo WEB_URL;*/?>/cartWishList.php">
 
-<?php } ?>
+                    <img src="<?php /*echo WEB_URL;*/?>/images/wishlish.png" width="90">
 
+                    <div><?php /*$dbF->hardWords('Wish List');*/?></div>
 
+                    </a>
 
-<!--<div class="col-sm-2 text-center padding-0">
+                    </div>-->
 
-<a href="<?php /*echo WEB_URL;*/?>/cartWishList.php">
 
-<img src="<?php /*echo WEB_URL;*/?>/images/wishlish.png" width="90">
+                    <div class="col-sm-6 text-center padding-0">
 
-<div><?php /*$dbF->hardWords('Wish List');*/?></div>
+                        <a href="<?php echo WEB_URL;?>/profile?page=schedule">
 
-</a>
+                            <img src="<?php echo WEB_URL;?>/images/schedule.png" width="90">
 
-</div>-->
+                            <div><?php $dbF->hardWords('Schedules');?></div>
 
+                        </a>
 
-<div class="col-sm-6 text-center padding-0">
+                    </div>
 
-<a href="<?php echo WEB_URL;?>/profile?page=schedule">
 
-<img src="<?php echo WEB_URL;?>/images/schedule.png" width="90">
+                    <div class="col-sm-6 text-center padding-0">
 
-<div><?php $dbF->hardWords('Schedules');?></div>
+                        <a href="<?php echo WEB_URL;?>/logout">
 
-</a>
+                            <img src="<?php echo WEB_URL;?>/images/logout.png" width="90">
 
-</div>
+                            <div><?php $dbF->hardWords('LogOut');?></div>
 
+                        </a>
 
-<div class="col-sm-6 text-center padding-0">
+                    </div>
 
-<a href="<?php echo WEB_URL;?>/logout">
+                    <div class="col-sm-6 text-center padding-0">
 
-<img src="<?php echo WEB_URL;?>/images/logout.png" width="90">
+                        <a data-toggle="modal" data-target="#message_modal" id="openSupport">
 
-<div><?php $dbF->hardWords('LogOut');?></div>
+                            <img src="<?php echo WEB_URL;?>/images/support-icon.jpg" width="90">
 
-</a>
+                            <div><?php $dbF->hardWords('Support');?></div>
 
-</div>
+                        </a>
 
-<div class="col-sm-6 text-center padding-0">
+                    </div>
 
-<a data-toggle="modal" data-target="#message_modal" id="openSupport">
 
-<img src="<?php echo WEB_URL;?>/images/support-icon.jpg" width="90">
 
-<div><?php $dbF->hardWords('Support');?></div>
+                    <div class="clearfix"></div>
+                
+                </div>
 
-</a>
-
-</div>
-
-
-
-<div class="clearfix"></div>
-</div>
+            </div>
 <!--wrapper_main2-->
 <?php
 
 }else{
 
-?>
+    ?>
 
 
 
-<?php
+    <?php
 
-if($msg!=''){
+    if($msg!=''){
 
-echo "<div class='alert alert-success'>$msg</div>";
+        echo "<div class='alert alert-success'>$msg</div>";
 
-}
+    }
 
-if($page == 'Profile'){
+    if($page == 'Profile'){
 
-$webClass->webUserEdit($webClass->webUserId());
+        $webClass->webUserEdit($webClass->webUserId());
 
-}
+    }
 
 
-if($page == 'schedule'){
+    if($page == 'schedule'){
 
-include('schedules.php');
+        include('schedules.php');
 
-}
+    }
 
 }
 
@@ -414,7 +416,7 @@ echo $functions->blankModal('Messages', 'message_modal', $message_body, "Close")
 .n_btn1 {
     width: 170px; 
 
-        font-size: 16px;
+    font-size: 16px;
     border: 2px solid #54c2bb;
     transition: .5s;
     padding: 4px;
@@ -429,7 +431,7 @@ echo $functions->blankModal('Messages', 'message_modal', $message_body, "Close")
 
 
 
-    }
+}
 
 hr {
 
@@ -437,111 +439,144 @@ hr {
 }
 .home_links_heading {
 
-min-height: 40px;
+    min-height: 40px;
 
-text-transform: uppercase;
+    text-transform: uppercase;
 
-width: 100%;
+    width: 100%;
 
-text-align: center;
+    text-align: center;
 
-color: #000;
+    color: #000;
 
-font-size: 22px;
+    font-size: 22px;
 
-font-family: 'ralewayextrabold';
+    font-family: 'ralewayextrabold';
 
-margin-bottom: 20px;
+    margin-bottom: 20px;
+
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    padding: 10px 15px 35px 15px;
 
 }
 
-/*#message_div {
-height: 200px;
-border: 1px solid #cccccc;
-border-radius: 5px;
-margin-bottom: 10px;
-}*/
 </style>
 
 <style>
 #status_infoModalLabel{
-text-align: center;
+    text-align: center;
 }
 
 .highlighed:hover td {
-background-color: #7cbe35 !important;
+    background-color: #7cbe35 !important;
 }
 
 #loader {
-position: fixed;
-top: 0;
-width: 100%;
-height: 100%;
-z-index: 999999999999999999999999999;
-background: url(images/loader.gif) center center no-repeat rgba(0,0,0,0.8);
-display: none;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999999999999999999999999999;
+    background: url(images/loader.gif) center center no-repeat rgba(0,0,0,0.8);
+    display: none;
 }
 
 #dropbox .progress {
-background-image: none;
+    background-image: none;
 }
 
-.container {
-border: 2px solid #dedede;
-background-color: #f1f1f1;
-border-radius: 5px;
-padding: 10px;
-margin: 10px 0;
-}
+    /*.container {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+    }*/
 
-.darker {
-border-color: #ccc;
-background-color: #ddd;
-text-align: right;
-}
+    .darker {
+        border-color: #ccc;
+        background-color: #ddd;
+        text-align: right;
+    }
 
-.container::after {
-content: "";
-clear: both;
-display: table;
-}
+    .container::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
 
-.container img {
-float: left;
-max-width: 60px;
-width: 100%;
-margin-right: 20px;
-border-radius: 50%;
-}
+    /*.container img {
+    float: left;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+    }*/
 
-.container img.right {
-float: right;
-margin-left: 20px;
-margin-right:0;
-}
+    .container img.right {
+        float: right;
+        margin-left: 20px;
+        margin-right:0;
+    }
 
-.time-right {
-float: right;
-color: #aaa;
-}
+    .time-right {
+        float: right;
+        color: #aaa;
+    }
 
-.time-left {
-/*float: left;*/
-color: #999;
-}
+    .time-left {
+        /*float: left;*/
+        color: #999;
+    }
 </style>
 
+<!-- style by shrestsav -->
+<style type="text/css">
+.contWrap {
+    background-color: #EEEEEE;
+    padding: 0px 0px 7px 0px;
+    margin-bottom: 20px;
+    position: relative;
+}
+.contWrap h4 {
+    background-color: #54c2bb;
+    display: inline-block;
+    padding: 10px;
+    color: #fff;
+    font-size: 14px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+.n_btn {
+    font-size: 16px;
+    border: 2px solid #54c2bb;
+    transition: .5s;
+    padding: 4px;
+    text-align: center;
+    color: #232332;
+    display: block;
+    position: relative;
+    width: 100px;
+    float: right;
+    margin-top: 8px;
+    margin-right: 20px;
+}
+.standard{
+    padding: 50px 100px;
+}
+</style>
 
 <script type="text/javascript">
 //modal open button click for tracking info
 $('body').on('click', '#openSupport', function(event) {
-event.preventDefault();
-/* Act on the event */
-var id = '<?php echo $user_id; ?>';
+    event.preventDefault();
+    /* Act on the event */
+    var id = '<?php echo $user_id; ?>';
 
-$.post('ajax_call.php?page=get_user_message', {id:id}, function(data, textStatus, xhr) {
-/*optional stuff to do after success */
-$('#message_div').html(data);
+    $.post('ajax_call.php?page=get_user_message', {id:id}, function(data, textStatus, xhr) {
+        /*optional stuff to do after success */
+        $('#message_div').html(data);
 // console.log(data);
 // $('#tracking_info').modal('hide');
 // $("#loader").slideUp(500);
@@ -553,29 +588,29 @@ $('#message_div').html(data);
 
 
 <script type="text/javascript">
-$('#messageSendButton').on('click', function(){
-form = $('#message_form').serialize();
+    $('#messageSendButton').on('click', function(){
+        form = $('#message_form').serialize();
 
-$.ajax({
-url: 'ajax_call.php?page=sendUserMessage',
-type: 'post',
-data: form
-}).done(function(res){
+        $.ajax({
+            url: 'ajax_call.php?page=sendUserMessage',
+            type: 'post',
+            data: form
+        }).done(function(res){
 // console.log(res);
 result = JSON.parse(res);
 if(result.ret == ''){
-$('.error_msg').html('<span class="alert alert-danger">Something Went Wrong! Please Try Again.</span>');
+    $('.error_msg').html('<span class="alert alert-danger">Something Went Wrong! Please Try Again.</span>');
 }else{
-$('#message_div').append(result.ret);
-$('.error_msg').html('<span class="alert alert-success">Message Sent Successfullly.</span>');
+    $('#message_div').append(result.ret);
+    $('.error_msg').html('<span class="alert alert-success">Message Sent Successfullly.</span>');
 }
 });
-});
+    });
 
-function goBack() {
-    window.history.back();
-}
-function validURL(str) {
+    function goBack() {
+        window.history.back();
+    }
+    function validURL(str) {
   var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
     '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
     '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
@@ -585,13 +620,13 @@ function validURL(str) {
   return !!pattern.test(str);
 }
 
-   function delOrderInvoice(ths){
-        order = $(ths).data('id');
-        month = $(ths).data('exp');
-        fee = $(ths).data('fee');
+function delOrderInvoice(ths){
+    order = $(ths).data('id');
+    month = $(ths).data('exp');
+    fee = $(ths).data('fee');
 
 
-confirm_order = 'Are you sure you want to Delete?\nIf you are canceling before the '+month+' th month, please note you will be charged a cancelation fee of '+fee+' AED.';
+    confirm_order = 'Are you sure you want to Delete?\nIf you are canceling before the '+month+' th month, please note you will be charged a cancelation fee of '+fee+' AED.';
 
 
 
@@ -604,15 +639,15 @@ confirm_order = 'Are you sure you want to Delete?\nIf you are canceling before t
                 data: {order:order}
             }).done(function(res){
                 if(validURL(res)){location.replace(res)}
-                else if(res == '1'){
-                    alert('Your request has been processed, someone from our operations team will contact you shortly to arrange pick up of the system');
-                }else{
-                    
-                    alert('Something Went Wrong! Please Try Again.');
-                }
-            });
-                 console.log(res);
-       }
+                    else if(res == '1'){
+                        alert('Your request has been processed, someone from our operations team will contact you shortly to arrange pick up of the system');
+                    }else{
+
+                        alert('Something Went Wrong! Please Try Again.');
+                    }
+                });
+            console.log(res);
+        }
     }
 
     function secure_delete(text){

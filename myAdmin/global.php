@@ -61,7 +61,7 @@ $subMenu='';
 $menuClassGlobal =new menu();
 $menuClassGlobal->menu();
 
-//echo "<br><br>";
+// echo "<pre>"; print_r($menuClassGlobal); echo "</pre>";
 $ActivePagePerm   = $functions->pagePermission();
 //if not permission i set error on header file
 

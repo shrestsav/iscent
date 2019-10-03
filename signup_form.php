@@ -423,13 +423,6 @@ $country_list = $functions->countrySelectOption();
     </div>
 </div>
 
-
-
-<script>
-    $(document).ready(function(){
-        $(".datepicker").datepicker();
-    });
-</script>
 <style>
 /*.btn-primary:hover, .btn-primary:focus {
     background-position: 0 0px !important;*/
