@@ -65,264 +65,265 @@ if(isset($_GET['order']) && isset($_GET['firstInv'])){
 	switch ($order_status) {
 		case '3':
 
-		$sql = "UPDATE `orders` SET 
-		`order_status` = ?,
-		`agrement_id` = ?
-		WHERE `order_id` = ?";
+			$sql = "UPDATE `orders` SET 
+			`order_status` = ?,
+			`agrement_id` = ?
+			WHERE `order_id` = ?";
 
-		$dbF->setRow($sql, array('process',$agrement_id,$order_id), false);
+			$dbF->setRow($sql, array('process',$agrement_id,$order_id), false);
 
-		$sql = "UPDATE `invoices` SET 
-		`invoice_status` = 'paid',
-		`trans_ref` = ?,
-		`trans_code` = ?,
-		`api_return` = ? 
-		WHERE `invoice_pk` = ?";
-		$dbF->setRow($sql, array($trans_ref, $trans_code, $api_return, $firstInv), false);
+			$sql = "UPDATE `invoices` SET 
+			`invoice_status` = 'paid',
+			`trans_ref` = ?,
+			`trans_code` = ?,
+			`api_return` = ? 
+			WHERE `invoice_pk` = ?";
+			$dbF->setRow($sql, array($trans_ref, $trans_code, $api_return, $firstInv), false);
 
-		if($dbF->rowCount > 0){
-			$user_id = $productClass->webUserId();
-			if($productClass->webUserId()=='0'){
-				createWebUserAccount(false,$order_id,'1',$name,$email,
-					array
-					('gender'=>'',
-						'type'=>'',
-						'date_of_birth'=>'',
-						'phone'=>$mobile,
-						'address'=>$address,
-					), 
-					array(
-						'company' => $company_name,
-						'firstName' => $results['order']['customer']['name']['forenames'],
-						'lastName' => $results['order']['customer']['name']['surname'],
-						'country' => $country
-					)
-				);
+			if($dbF->rowCount > 0){
+				$user_id = $productClass->webUserId();
+				if($productClass->webUserId()=='0'){
+					createWebUserAccount(false,$order_id,'1',$name,$email,
+						array
+						('gender'=>'',
+							'type'=>'',
+							'date_of_birth'=>'',
+							'phone'=>$mobile,
+							'address'=>$address,
+						), 
+						array(
+							'company' => $company_name,
+							'firstName' => $results['order']['customer']['name']['forenames'],
+							'lastName' => $results['order']['customer']['name']['surname'],
+							'country' => $country
+						)
+					);
 
-				$sql = "SELECT `order_user` FROM `orders`
-				WHERE order_id = '$order_id'";
-				$res = $dbF->getRow($sql);
+					$sql = "SELECT `order_user` FROM `orders`
+					WHERE order_id = '$order_id'";
+					$res = $dbF->getRow($sql);
 
-				$user_id = $res['order_user'];
+					$user_id = $res['order_user'];
+
+				}
+
+				#############  Zoho Create Invoice Start  ##############
+
+
+				$sql = "SELECT `zoho_contact_id`, `zoho_contact_person` FROM `accounts_user` WHERE `acc_id` = ?";
+				$res = $dbF->getRow($sql, array($user_id));
+
+				if(!empty($res)){
+
+					$zoho_contact_id     = $res['zoho_contact_id'];
+					$zoho_contact_person = $res['zoho_contact_person'];
+
+					$sql_invDet = "SELECT * FROM `invoices` WHERE `invoice_pk` = ?";
+					$res_invDet = $dbF->getRow($sql_invDet, array($firstInv));
+
+					$sql_pid = "SELECT o.`product_id` FROM `orders` o JOIN `invoices` i WHERE o.`order_id` = i.`order_id` AND i.`invoice_pk` = ?";
+					$res_pid = $dbF->getRow($sql_pid, array($firstInv));
+
+					$sql_item = "SELECT pd.`prodet_name`,pd.`prodet_shortDesc`,pd.`zoho_item_no`,pp.`propri_price` FROM `proudct_detail` pd JOIN `product_price` pp WHERE pd.`prodet_id` = pp.`propri_prodet_id` AND pd.`prodet_id` = ?";
+					$res_item = $dbF->getRow($sql_item, array($res_pid['product_id']));
+
+					$pro_name = translateFromSerialize($res_item['prodet_name']);
+					$pro_desc = translateFromSerialize($res_item['prodet_shortDesc']);
+
+
+
+					$order_invoice_print = $functions->ibms_setting('invoice_key_start_with').$order_id.' - '.$firstInv;
+
+					$invoice_det = array(
+						'customer_id' => $zoho_contact_id,
+						'contact_persons' => array($zoho_contact_person),
+						'invoice_number' => $order_invoice_print,
+						'date' => $res_invDet['due_date'],
+						'line_items' => array(
+							array(
+								'item_id' => $res_item['zoho_item_no'],
+								'name' => $pro_name,
+								'description' => $pro_desc,
+								'item_order' => 1,
+								'rate' => doubleval($res_invDet['price']),
+								'quantity' => 1
+							)
+						)
+
+
+					);
+
+
+					$client_id = '1000.AGGPITUHTRJX796776SOBEHDYZMA7B';
+					$secret = '4501c354085ff3bfbf65e112d081eefef0235a1246';
+
+					// Zoho Books Refresh Token with Scope of Full Access ( ZohoBooks.fullaccess.all ).
+					$refresh = '1000.fcd984a2fe5cff258eb683d3303d87c5.eaa78c1e95d3e9558ed50626c0cc252b'; 
+
+
+					$params = array(
+						'refresh_token' => $refresh,
+						'client_id' => $client_id,
+						'client_secret' => $secret,
+						'redirect_uri' => WEB_URL.'/orderInvoice.php',
+						'grant_type' => 'refresh_token'
+					);
+
+					// Using refresh token to generate access token.
+					$ch = curl_init(); 
+					curl_setopt($ch, CURLOPT_URL, "https://accounts.zoho.com/oauth/v2/token");
+					curl_setopt($ch, CURLOPT_POST, count($params));
+					curl_setopt($ch, CURLOPT_POSTFIELDS,$params);
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+					$results = curl_exec($ch);
+					curl_close($ch);
+
+					$array = json_decode($results,true);
+
+					$access_token = $array['access_token']; // Access Token
+
+
+					$ch = curl_init();
+					curl_setopt($ch, CURLOPT_URL, "https://books.zoho.com/api/v3/invoices?organization_id=667162566&ignore_auto_number_generation=true");
+					curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Zoho-oauthtoken {$access_token}","Content-Type: application/x-www-form-urlencoded;charset=UTF-8"));
+					curl_setopt($ch, CURLOPT_POSTFIELDS,'JSONString='.json_encode($invoice_det));
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+					$results2 = curl_exec($ch);
+					curl_close($ch);
+
+					$array2 = json_decode($results2,true);
+
+					if($array2['code'] == '0'){
+						$zoho_inv_id = $array2['invoice']['invoice_id'];
+
+						$sql_upd = "UPDATE `invoices` SET `zoho_inv_id` = ? WHERE `invoice_pk` = ?";
+						$dbF->setRow($sql_upd, array($zoho_inv_id,$firstInv), false);
+					}
+
+				}
+
+
+				#############  Zoho Create Invoice Start  ##############
+
+				$_GET['mailId'] = $order_id;
+				$msg2 = include(__DIR__.'/orderMail.php');
+
+				$orderIdInvoice =   $functions->ibms_setting('invoice_key_start_with').$order_id;
+				$orderIdInvoice =   $dbF->hardWords('Thank you for your purchase. Order ID ',false)." ($orderIdInvoice)";
+				$fromName       =   $functions->webName;
+
+				$mailArray['fromName']    =   $fromName;
+				$functions->send_mail($email,$orderIdInvoice,$msg2,'',$name,$mailArray);
+
+				$adminMail = $functions->ibms_setting('Email');
+				$functions->send_mail($adminMail,$orderIdInvoice,$msg2,'','',$mailArray);
+
+				echo '
+				<section class="orderInvoice-bg page-banner">
+					<div class="page-heading">
+						<h2>Order Invoice</h2>
+						<nav aria-label="breadcrumb">
+							<ol class="breadcrumb text-center">
+								<li class="breadcrumb-item"><a href="#">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Order Invoice</li>
+							</ol>
+						</nav>
+					</div>
+				</section>
+				<section id="content" class="section-container less-space">
+					<div class="container">
+						<div class="row">
+							<div class="section-heading text-left">
+								<h3 class="promo-text">Your order has been confirmed, you will receive an email shortly with your login credentials.<br>One of our specialists will contact you shortly to arrange your fragrance consultation.</h3> <br>
+							</div>
+						</div>
+					</div>
+				</section>
+				';
 
 			}
 
-			#############  Zoho Create Invoice Start  ##############
+		break;
 
+		case '-2':
 
-			$sql = "SELECT `zoho_contact_id`, `zoho_contact_person` FROM `accounts_user` WHERE `acc_id` = ?";
-			$res = $dbF->getRow($sql, array($user_id));
+			$sql = "UPDATE `orders` SET 
+			`order_status` = ?
+			WHERE `order_id` = ?";
 
-			if(!empty($res)){
+			$dbF->setRow($sql, array('cancelled',$order_id), false);
 
-				$zoho_contact_id     = $res['zoho_contact_id'];
-				$zoho_contact_person = $res['zoho_contact_person'];
+			echo '
+			<section class="orderInvoice-bg page-banner">
+				<div class="page-heading">
+					<h2>Order Invoice</h2>
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb text-center">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Order Invoice</li>
+						</ol>
+					</nav>
+				</div>
+			</section>
+			<section id="content" class="section-container less-space">
+				<div class="container">
+					<div class="row">
+						<div class="section-heading text-left">
+							<h3 class="promo-text">Your Order Cancelled!</h3>
+						</div>
+					</div>
+				</div>
+			</section>
+			';
 
-				$sql_invDet = "SELECT * FROM `invoices` WHERE `invoice_pk` = ?";
-				$res_invDet = $dbF->getRow($sql_invDet, array($firstInv));
+			break;
 
-				$sql_pid = "SELECT o.`product_id` FROM `orders` o JOIN `invoices` i WHERE o.`order_id` = i.`order_id` AND i.`invoice_pk` = ?";
-				$res_pid = $dbF->getRow($sql_pid, array($firstInv));
+		case '-3':
 
-				$sql_item = "SELECT pd.`prodet_name`,pd.`prodet_shortDesc`,pd.`zoho_item_no`,pp.`propri_price` FROM `proudct_detail` pd JOIN `product_price` pp WHERE pd.`prodet_id` = pp.`propri_prodet_id` AND pd.`prodet_id` = ?";
-				$res_item = $dbF->getRow($sql_item, array($res_pid['product_id']));
+			$sql = "UPDATE `orders` SET 
+			`order_status` = ?
+			WHERE `order_id` = ?";
 
-				$pro_name = translateFromSerialize($res_item['prodet_name']);
-				$pro_desc = translateFromSerialize($res_item['prodet_shortDesc']);
+			$dbF->setRow($sql, array('cancelled', $order_id), false);
 
+			echo '
+			<section class="orderInvoice-bg page-banner">
+				<div class="page-heading">
+					<h2>Order Invoice</h2>
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb text-center">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Order Invoice</li>
+						</ol>
+					</nav>
+				</div>
+			</section>
+			<section id="content" class="section-container less-space">
+				<div class="container">
+					<div class="row">
+						<div class="section-heading text-left">
+							<h3 class="promo-text">Your Order Cancelled!</h3>
+						</div>
+					</div>
+				</div>
+			</section>
+			';
 
+			break;
 
-				$order_invoice_print = $functions->ibms_setting('invoice_key_start_with').$order_id.' - '.$firstInv;
-
-				$invoice_det = array(
-					'customer_id' => $zoho_contact_id,
-					'contact_persons' => array($zoho_contact_person),
-					'invoice_number' => $order_invoice_print,
-					'date' => $res_invDet['due_date'],
-					'line_items' => array(
-						array(
-							'item_id' => $res_item['zoho_item_no'],
-							'name' => $pro_name,
-							'description' => $pro_desc,
-							'item_order' => 1,
-							'rate' => doubleval($res_invDet['price']),
-							'quantity' => 1
-						)
-					)
-
-
-				);
-
-
-				$client_id = '1000.AGGPITUHTRJX796776SOBEHDYZMA7B';
-				$secret = '4501c354085ff3bfbf65e112d081eefef0235a1246';
-
-				// Zoho Books Refresh Token with Scope of Full Access ( ZohoBooks.fullaccess.all ).
-				$refresh = '1000.fcd984a2fe5cff258eb683d3303d87c5.eaa78c1e95d3e9558ed50626c0cc252b'; 
-
-
-				$params = array(
-					'refresh_token' => $refresh,
-					'client_id' => $client_id,
-					'client_secret' => $secret,
-					'redirect_uri' => WEB_URL.'/orderInvoice.php',
-					'grant_type' => 'refresh_token'
-				);
-
-				// Using refresh token to generate access token.
-				$ch = curl_init(); 
-				curl_setopt($ch, CURLOPT_URL, "https://accounts.zoho.com/oauth/v2/token");
-				curl_setopt($ch, CURLOPT_POST, count($params));
-				curl_setopt($ch, CURLOPT_POSTFIELDS,$params);
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-				$results = curl_exec($ch);
-				curl_close($ch);
-
-				$array = json_decode($results,true);
-
-				$access_token = $array['access_token']; // Access Token
-
-
-				$ch = curl_init();
-				curl_setopt($ch, CURLOPT_URL, "https://books.zoho.com/api/v3/invoices?organization_id=667162566&ignore_auto_number_generation=true");
-				curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Zoho-oauthtoken {$access_token}","Content-Type: application/x-www-form-urlencoded;charset=UTF-8"));
-				curl_setopt($ch, CURLOPT_POSTFIELDS,'JSONString='.json_encode($invoice_det));
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-				$results2 = curl_exec($ch);
-				curl_close($ch);
-
-				$array2 = json_decode($results2,true);
-
-				if($array2['code'] == '0'){
-					$zoho_inv_id = $array2['invoice']['invoice_id'];
-
-					$sql_upd = "UPDATE `invoices` SET `zoho_inv_id` = ? WHERE `invoice_pk` = ?";
-					$dbF->setRow($sql_upd, array($zoho_inv_id,$firstInv), false);
-				}
+		default:
+			# code...
+			break;
+	}
 
 }
-
-
-#############  Zoho Create Invoice Start  ##############
-
-$_GET['mailId'] = $order_id;
-$msg2 = include(__DIR__.'/orderMail.php');
-
-$orderIdInvoice =   $functions->ibms_setting('invoice_key_start_with').$order_id;
-$orderIdInvoice =   $dbF->hardWords('Thank you for your purchase. Order ID ',false)." ($orderIdInvoice)";
-$fromName       =   $functions->webName;
-
-$mailArray['fromName']    =   $fromName;
-$functions->send_mail($email,$orderIdInvoice,$msg2,'',$name,$mailArray);
-
-$adminMail = $functions->ibms_setting('Email');
-$functions->send_mail($adminMail,$orderIdInvoice,$msg2,'','',$mailArray);
-
-echo '
-<section class="orderInvoice-bg page-banner">
-	<div class="page-heading">
-		<h2>Order Invoice</h2>
-		<nav aria-label="breadcrumb">
-			<ol class="breadcrumb text-center">
-				<li class="breadcrumb-item"><a href="#">Home</a></li>
-				<li class="breadcrumb-item active" aria-current="page">Order Invoice</li>
-			</ol>
-		</nav>
-	</div>
-</section>
-<section id="content" class="section-container less-space">
-	<div class="container">
-		<div class="row">
-			<div class="section-heading text-left">
-				<h3 class="promo-text">Your order has been confirmed, you will receive an email shortly with your login credentials.<br>One of our specialists will contact you shortly to arrange your fragrance consultation.</h3> <br>
-			</div>
-		</div>
-	</div>
-</section>
-';
-
-}
-
-break;
-
-case '-2':
-
-$sql = "UPDATE `orders` SET 
-`order_status` = ?
-WHERE `order_id` = ?";
-
-$dbF->setRow($sql, array('cancelled',$order_id), false);
-
-echo '
-<section class="orderInvoice-bg page-banner">
-	<div class="page-heading">
-		<h2>Order Invoice</h2>
-		<nav aria-label="breadcrumb">
-			<ol class="breadcrumb text-center">
-				<li class="breadcrumb-item"><a href="#">Home</a></li>
-				<li class="breadcrumb-item active" aria-current="page">Order Invoice</li>
-			</ol>
-		</nav>
-	</div>
-</section>
-<section id="content" class="section-container less-space">
-	<div class="container">
-		<div class="row">
-			<div class="section-heading text-left">
-				<h3 class="promo-text">Your Order Cancelled!</h3>
-			</div>
-		</div>
-	</div>
-</section>
-';
-
-break;
-
-case '-3':
-
-$sql = "UPDATE `orders` SET 
-`order_status` = ?
-WHERE `order_id` = ?";
-
-$dbF->setRow($sql, array('cancelled', $order_id), false);
-
-echo '
-<section class="orderInvoice-bg page-banner">
-	<div class="page-heading">
-		<h2>Order Invoice</h2>
-		<nav aria-label="breadcrumb">
-			<ol class="breadcrumb text-center">
-				<li class="breadcrumb-item"><a href="#">Home</a></li>
-				<li class="breadcrumb-item active" aria-current="page">Order Invoice</li>
-			</ol>
-		</nav>
-	</div>
-</section>
-<section id="content" class="section-container less-space">
-	<div class="container">
-		<div class="row">
-			<div class="section-heading text-left">
-				<h3 class="promo-text">Your Order Cancelled!</h3>
-			</div>
-		</div>
-	</div>
-</section>
-';
-
-break;
-
-default:
-# code...
-break;
-}
-
-}else{
+else{
 
 }
 
 
 function createWebUserAccount($orderUser=false,$invoiceId,$status='1',$name,$email,$settingArray=array(), $zohoContact=false){
-//$status = "1"; //pending 0 .. 1 active
+	//$status = "1"; //pending 0 .. 1 active
 
 	global $functions;
 	global $webClass;

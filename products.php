@@ -166,7 +166,7 @@ else
 							<input type="text" class="form-control" name="address" value="<?= $webClass->webUserInfoArray($userInfo,'address'); ?>" placeholder="Address" required>
 						</div>
 						<div class="form-group col-md-6">
-							<select name="" class="form-control" id="" name="country" required>
+							<select class="form-control" name="country" required>
 								<option value="" selected="selected">Select Emirate</option>
 								<option value="AB">Abu Dhabi</option>
 								<option value="AJ">Ajman</option>
